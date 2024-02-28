@@ -78,7 +78,8 @@ np.std(b) # standard deviation of all elements in the array
 
 # axis 0 runs downward, axis 1 runs horizontal in a 2d
 
-h = a.view()
+h = a.view() # creates array h that is a copy of array a, points to the same memory so a will be affected
+# things like transpose of h won't affect a because it doesn't do anything to memory
 np.copy(a) # deep copy of a where new array owns its own data
 h = a.copy() # assigns deep copy of a to h
 a.sort() # sorts array in ascending order, will sort around the last axis for multi dimensional (rows)
@@ -90,3 +91,17 @@ b[0:2,1] # elements from row 0 upto 2 and selects column 1 of these rows
 b[:1] # slects first element, or selects first group in the first dimension
 c[1,...] # used to get group 1 of first dimension
 a[::-1] # reverses the array, reverses groups of first dimension in multiple dimensions
+
+a[a<2] # returns values of a that are less than 2, will flatten 2 or 3d to 1d
+b[[1,0,1,0],[0,1,2,0]] # fancy indexing where the first array refers to row and second array refers to column
+# together this would select b[1][0] b[0][1] b[1][2] and b[0][0] into a single 1D array
+b[[1,0,1,0]][:,[0,1,2,0]] # creates an array choosing rows 1, 0, 1 and 0 again
+# next it selects all rows and only chooses column 0, 1, 2, and 0 again
+i = np.transpose(b) # columns become rows
+i.T # another way to transpose
+b.ravel() # flattens b into a 1D array row wise
+g.reshape(3, -2)
+h.resize((2,6))
+np.append(h, g)
+np.insert(a, 1, 5)
+np.delete(a, [1])
